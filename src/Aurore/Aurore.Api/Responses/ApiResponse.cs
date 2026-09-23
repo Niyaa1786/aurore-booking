@@ -1,4 +1,4 @@
-﻿namespace Mille.Api.Responses
+﻿namespace Aurore.Api.Responses
 {
     public class ApiResponse<T>
     {

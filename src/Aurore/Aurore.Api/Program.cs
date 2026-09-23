@@ -1,6 +1,6 @@
 using Aurore.Application;
 using Aurore.Infrastructure;
-using Mille.Api.Handler;
+using Aurore.Api.Handler;
 using Scalar.AspNetCore;
 using Serilog;
 using Serilog.Events;

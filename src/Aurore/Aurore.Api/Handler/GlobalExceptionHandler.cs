@@ -3,11 +3,11 @@ using Aurore.Domain.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Mille.Api.Responses;
+using Aurore.Api.Responses;
 using System.Net;
 using System.Text.Json;
 
-namespace Mille.Api.Handler
+namespace Aurore.Api.Handler
 {
     public class GlobalExceptionHandler : IExceptionHandler
     {
@@ -24,22 +24,22 @@ namespace Mille.Api.Handler
                 errors = valEx.Errors.GroupBy(e => e.PropertyName)
                     .ToDictionary(g => JsonNamingPolicy.CamelCase.ConvertName(g.Key), g => g.Select(e => e.ErrorMessage).ToArray());
             }
-            else if(exception is DomainException domainEx)
+            else if (exception is DomainException domainEx)
             {
                 statusCode = (int)HttpStatusCode.BadRequest;
                 message = domainEx.Message;
             }
-            else if(exception is NotFoundException notFoundEx)
+            else if (exception is NotFoundException notFoundEx)
             {
                 statusCode = (int)HttpStatusCode.NotFound;
                 message = notFoundEx.Message;
             }
-            else if(exception is UnauthorizedAccessException)
+            else if (exception is UnauthorizedAccessException)
             {
                 statusCode = (int)HttpStatusCode.Unauthorized;
                 message = "Unauthorized access";
             }
-            else if(exception is DbUpdateConcurrencyException)
+            else if (exception is DbUpdateConcurrencyException)
             {
                 statusCode = (int)HttpStatusCode.Conflict;
                 message = "An unexpected error occurred. Please try again later.";
