@@ -3,11 +3,13 @@ using Aurore.Infrastructure;
 using Mille.Api.Handler;
 using Scalar.AspNetCore;
 using Serilog;
+using Serilog.Events;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .CreateLogger();
 
 try
