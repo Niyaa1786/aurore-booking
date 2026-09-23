@@ -1,4 +1,5 @@
 ﻿using Aurore.Domain.Entities;
+using Aurore.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,22 @@ namespace Aurore.Infrastructure.Persistence.Data
                 entity.Property(e => e.RefreshToken).HasMaxLength(500);
 
                 entity.HasIndex(e => e.Email).IsUnique();
+            });
+
+            SeedData(modelBuilder);
+        }
+
+        private void SeedData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(new
+            {
+                Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                Role = UserRole.Admin,
+                FullName = "Admin",
+                Email = "admin@aurore.com",
+                PasswordHash = "$2a$11$E3RGRhjfkGzTz5J42JIOXe3dpiCEGaiZZxLIYfm0qdwnc/xFU/w.u",
+                CreatedAt = new DateTime(2026, 9, 24),
+                UpdatedAt = new DateTime(2026, 9, 24),
             });
         }
     }
