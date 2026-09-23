@@ -21,7 +21,7 @@ namespace Aurore.Infrastructure.Persistence.Repositories
         public async Task<User?> GetByRefreshTokenAsync(string refreshToken, CancellationToken ct = default)
             => await _context.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken, ct);
 
-        public async Task<bool> IsEmailExist(string email, CancellationToken ct = default)
+        public async Task<bool> ExistByEmail(string email, CancellationToken ct = default)
             => await _context.Users.AnyAsync(u => u.Email == email.Trim(), ct);
 
         public void Add(User entity) => _context.Add(entity);

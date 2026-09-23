@@ -7,6 +7,6 @@ namespace Aurore.Domain.Interfaces
     {
         Task<User?> GetByEmailAsync(string email, CancellationToken ct = default);
         Task<User?> GetByRefreshTokenAsync(string refreshToken, CancellationToken ct = default);
-        Task<bool> IsEmailExist(string email, CancellationToken ct = default);
+        Task<bool> ExistByEmail(string email, CancellationToken ct = default);
     }
 }
