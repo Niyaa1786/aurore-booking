@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="Aurore.Api/Aurore.Api.csproj" />
+  <Project Path="D:/Archives/GitHub Repo/Aurore/aurore-booking/src/Aurore/Aurore.Api/Aurore.Api.csproj" />
+  <Project Path="D:/Archives/GitHub Repo/Aurore/aurore-booking/src/Aurore/Aurore.Application/Aurore.Application.csproj" />
+  <Project Path="D:/Archives/GitHub Repo/Aurore/aurore-booking/src/Aurore/Aurore.Domain/Aurore.Domain.csproj" />
+  <Project Path="D:/Archives/GitHub Repo/Aurore/aurore-booking/src/Aurore/Aurore.Infrastructure/Aurore.Infrastructure.csproj" />
 </Solution>
