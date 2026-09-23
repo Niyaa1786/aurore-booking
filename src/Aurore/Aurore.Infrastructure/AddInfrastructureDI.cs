@@ -1,6 +1,7 @@
 ﻿using Aurore.Application.Common.Interfaces;
 using Aurore.Infrastructure.Persistence.Data;
 using Aurore.Infrastructure.Persistence.Repositories;
+using Aurore.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,9 @@ namespace Aurore.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
 
             return services;
         }
