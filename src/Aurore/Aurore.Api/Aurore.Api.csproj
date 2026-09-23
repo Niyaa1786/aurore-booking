@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Aurore.Application\Aurore.Application.csproj" />
     <ProjectReference Include="..\Aurore.Infrastructure\Aurore.Infrastructure.csproj" />
   </ItemGroup>
