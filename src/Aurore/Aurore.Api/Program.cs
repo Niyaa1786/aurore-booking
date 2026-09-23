@@ -21,6 +21,7 @@ try
     builder.Services.AddInfrastructure(builder.Configuration);
 
     builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+    builder.Services.AddProblemDetails();
 
     builder.Services.AddControllers().AddJsonOptions(options =>
     {
