@@ -11,6 +11,11 @@ namespace Aurore.Domain.Entities
         public int Quantity { get; private set; }
         public decimal UnitPrice { get; private set; }
 
+        public Order? Order { get; private set; }
+
+        private readonly List<Ticket> _tickets = new();
+        public IReadOnlyCollection<Ticket> Tickets => _tickets.AsReadOnly();
+
         private OrderItem() { }
 
         internal OrderItem(Guid orderId, Guid ticketTypeId, int quantity, decimal unitPrice)

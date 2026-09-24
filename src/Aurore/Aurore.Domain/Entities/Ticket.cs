@@ -12,6 +12,8 @@ public class Ticket
     public TicketStatus Status { get; private set; }
     public DateTime IssuedAt { get; private set; }
 
+    public OrderItem? OrderItem { get; private set; }
+
     private Ticket() { }
 
     public Ticket(Guid orderItemId, string code)

@@ -17,6 +17,9 @@ namespace Aurore.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
+        private readonly List<Order> _orders = new();
+        public IReadOnlyCollection<Order> Orders => _orders.AsReadOnly();
+
         private User() { }
 
         public User(string fullName, string email, string passwordHash, UserRole role)
@@ -32,7 +35,7 @@ namespace Aurore.Domain.Entities
 
         public void UpdateProfile(string fullName, string? phone)
         {
-            if(string.IsNullOrEmpty(fullName))
+            if (string.IsNullOrEmpty(fullName))
                 throw new DomainException("FullName hash cannot be null or empty.");
 
             FullName = fullName;
@@ -42,7 +45,7 @@ namespace Aurore.Domain.Entities
 
         public void ChangePassword(string passwordHash)
         {
-            if(string.IsNullOrEmpty(passwordHash))
+            if (string.IsNullOrEmpty(passwordHash))
                 throw new DomainException("Password hash cannot be null or empty.");
 
             PasswordHash = passwordHash;
@@ -51,9 +54,9 @@ namespace Aurore.Domain.Entities
 
         public void SetRefreshToken(string token, DateTime expiry)
         {
-            if(string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
                 throw new DomainException("Refresh token cannot be null or empty");
-                
+
             RefreshToken = token;
             RefreshTokenExpiryTime = expiry;
             UpdatedAt = DateTime.UtcNow;

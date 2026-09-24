@@ -17,6 +17,8 @@ namespace Aurore.Domain.Entities
         private readonly List<OrderItem> _items = new();
         public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
 
+        public User? User { get; private set; }
+
         private Order() { }
 
         public Order(Guid userId, DateTime expiresAt)
