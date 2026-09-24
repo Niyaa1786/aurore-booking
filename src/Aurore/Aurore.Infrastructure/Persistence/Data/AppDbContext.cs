@@ -10,6 +10,11 @@ namespace Aurore.Infrastructure.Persistence.Data
     public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+
+
         public AppDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,6 +29,46 @@ namespace Aurore.Infrastructure.Persistence.Data
                 entity.Property(e => e.RefreshToken).HasMaxLength(500);
 
                 entity.HasIndex(e => e.Email).IsUnique();
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Status).HasConversion<string>().HasMaxLength(20);
+                entity.Property(e => e.TotalAmount).HasColumnType("decimal(18,2)");
+
+                entity.HasMany(e => e.Items)
+                    .WithOne(i => i.Order)
+                    .HasForeignKey(i => i.OrderId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(e => e.UserId);
+                entity.HasIndex(e => new { e.Status, e.ExpiresAt });
+            });
+
+            modelBuilder.Entity<OrderItem>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.UnitPrice).HasColumnType("decimal(18,2)");
+
+                entity.HasMany(e => e.Tickets)
+                      .WithOne(t => t.OrderItem)
+                      .HasForeignKey(t => t.OrderItemId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasIndex(e => e.OrderId);
+                entity.HasIndex(e => e.TicketTypeId);
+            });
+
+            modelBuilder.Entity<Ticket>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Code).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.Status).HasConversion<string>().HasMaxLength(20);
+
+                entity.HasIndex(e => e.Code).IsUnique();
+                entity.HasIndex(e => e.OrderItemId);
             });
 
             SeedData(modelBuilder);

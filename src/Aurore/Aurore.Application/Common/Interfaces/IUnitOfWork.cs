@@ -8,6 +8,9 @@ namespace Aurore.Application.Common.Interfaces
     public interface IUnitOfWork
     {
         IUserRepository Users { get; }
+        IOrderRepository Orders { get; }
+        ITicketRepository Tickets { get; }
+
         Task<int> SaveChangesAsync(CancellationToken ct = default);
     }
 }
