@@ -12,5 +12,6 @@ namespace Aurore.Domain.Interfaces
         Task<IEnumerable<Order>> GetOrdersAsync(OrderStatus? status, int page, int pageSize, CancellationToken ct = default);
         Task<IEnumerable<Order>> GetExpiredPendingOrdersAsync(DateTime now, int batchSize, CancellationToken ct = default);
         Task<int> CountOrdersAsync(OrderStatus? status, CancellationToken ct = default);
+        Task<int> CountOrdersByUserIdAsync(Guid userId, OrderStatus? status = null, CancellationToken ct = default);
     }
 }

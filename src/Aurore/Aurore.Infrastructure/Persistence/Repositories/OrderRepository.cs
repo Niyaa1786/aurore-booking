@@ -71,6 +71,18 @@ namespace Aurore.Infrastructure.Persistence.Repositories
             return await query.CountAsync(ct);
         }
 
+        public async Task<int> CountOrdersByUserIdAsync(Guid userId, OrderStatus? status = null, CancellationToken ct = default)
+        {
+            var query = _context.Orders
+                .AsNoTracking()
+                .Where(o => o.UserId == userId);
+
+            if (status.HasValue)
+                query = query.Where(o => o.Status == status.Value);
+
+            return await query.CountAsync(ct);
+        }
+
         public async Task<IEnumerable<Order>> GetExpiredPendingOrdersAsync(DateTime now, int batchSize, CancellationToken ct = default)
             => await _context.Orders
                 .Include(o => o.Items)
